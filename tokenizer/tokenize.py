@@ -37,17 +37,20 @@ def run():
     train(ch_input, ch_vocab_size, ch_model_name, ch_model_type, ch_character_coverage)
 
 
-def test():
+def test_model():
     sp = spm.SentencePieceProcessor()
     text = "美国总统特朗普今日抵达夏威夷。"
 
     sp.Load("./chn.model")
     print(sp.EncodeAsPieces(text))
-    print(sp.EncodeAsIds(text))
-    a = [12907, 277, 7419, 7318, 18384, 28724]
-    print(sp.decode_ids(a))
+    ids = sp.EncodeAsIds(text)
+    print(ids)
+    decoded = sp.decode_ids(ids)
+    print(decoded)
+    assert text == decoded
 
 
 if __name__ == "__main__":
     run()
     # test()
+    # use `pytest -s ./tokenize.py` to run the test
