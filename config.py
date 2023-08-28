@@ -42,6 +42,7 @@ device_id = [0, 1]
 
 # set device
 if gpu_id != '':
-    device = torch.device(f"cuda:{gpu_id}")
+    # device = torch.device(f"cuda:{gpu_id}")
+    device = torch.device(f"mps:{gpu_id}")
 else:
     device = torch.device('cpu')

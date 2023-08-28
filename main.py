@@ -68,7 +68,8 @@ def run():
     # 训练
     if config.use_smoothing:
         criterion = LabelSmoothing(size=config.tgt_vocab_size, padding_idx=config.padding_idx, smoothing=0.1)
-        criterion.cuda()
+        # criterion.cuda()
+        criterion.mps()
     else:
         criterion = torch.nn.CrossEntropyLoss(ignore_index=0, reduction='sum')
     if config.use_noamopt:
@@ -120,5 +121,5 @@ if __name__ == "__main__":
     os.environ['CUDA_VISIBLE_DEVICES'] = '2, 3'
     import warnings
     warnings.filterwarnings('ignore')
-    # run()
-    translate_example()
+    run()
+    # translate_example()
